@@ -1,5 +1,6 @@
 hy2://d5488371-4d89-4699-890f-7abeb28c4076@hsmg.huasuan666.top:22151?insecure=1&sni=hsmg.huasuan666.top#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40msv2flyng%20%5B4%5D
 hy2://a16d62f6-048d-11f0-af5a-f23c93136cb3@b9c3912b-t07z40-t1l1nh-d6ar.la.shifen.uk:1743?sni=b9c3912b-t07z40-t1l1nh-d6ar.la.shifen.uk#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40msv2flyng%20%5B2%5D
 hy2://de8854c7-fa17-4266-ae18-50a9732a0c4e@it1.1010991.xyz:3001?insecure=1&sni=it1.1010991.xyz#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40msv2flyng%20%5B1%5D
-hy2://a59be66d-1e59-40ea-b378-ceecd80c3337@45.11.1.62:443?mport=50000-55000&insecure=1&sni=www.microsoft.com#%F0%9F%87%AF%F0%9F%87%B5%20JP%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2raytg%20%5B50%5D
 hy2://dongtaiwang.com@51.159.111.32:5355?insecure=1&sni=www.bing.com#%F0%9F%87%AB%F0%9F%87%B7%20FR%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2raytg%20%5B54%5D
+hy2://a59be66d-1e59-40ea-b378-ceecd80c3337@45.11.1.62:443?mport=50000-55000&insecure=1&sni=www.microsoft.com#%F0%9F%87%AF%F0%9F%87%B5%20JP%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2raytg%20%5B50%5D
+hy2://8da7bd17-70ab-472d-a925-cc827857dc35@ylk.1mao.me:443?mport=30101-30199&insecure=1&sni=ylk.1mao.me#%F0%9F%87%AE%F0%9F%87%B6%20IQ%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B49%5D
