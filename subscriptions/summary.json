@@ -1,10 +1,9 @@
 {
-    "generated_at": "2025-09-12T03:19:40+00:00",
-    "proxies_found_in_source": 89,
-    "live_proxies_found": 53,
+    "generated_at": "2025-09-12T04:10:24+00:00",
+    "proxies_found_in_source": 20,
+    "live_proxies_found": 14,
     "live_proxies_by_type": {
-        "ss": 1,
-        "vless": 47,
-        "vmess": 5
+        "vless": 12,
+        "vmess": 2
     }
 }
