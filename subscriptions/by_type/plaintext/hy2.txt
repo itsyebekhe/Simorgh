@@ -1,3 +1,1 @@
 hy2://78c2bad7-f5f3-41f2-88cc-81de9d05040b@xg1.mangshe.xyz:2056?insecure=1#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2ray_collector%20%5B10%5D
-hy2://8391a553-d045-4184-bb68-746aaf9617b5@yd.foldjc.top:37014?insecure=1&sni=yd.foldjc.top#%F0%9F%87%B7%F0%9F%87%BA%20RU%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B49%5D
-hy2://5a2e4dfd-2e34-4f6b-bde7-a0b9ad45ac99@45.11.1.62:50000?insecure=1&sni=www.microsoft.com#%F0%9F%87%AF%F0%9F%87%B5%20JP%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B50%5D
