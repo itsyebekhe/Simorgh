@@ -1,3 +1,5 @@
 hy2://d5488371-4d89-4699-890f-7abeb28c4076@hsmg.huasuan666.top:22151?insecure=1&sni=hsmg.huasuan666.top#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40msv2flyng%20%5B6%5D
 hy2://a16d62f6-048d-11f0-af5a-f23c93136cb3@b9c3912b-t07z40-t1l1nh-d6ar.la.shifen.uk:1743?sni=b9c3912b-t07z40-t1l1nh-d6ar.la.shifen.uk#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40msv2flyng%20%5B4%5D
 hy2://78c2bad7-f5f3-41f2-88cc-81de9d05040b@xg1.mangshe.xyz:2056?insecure=1#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2ray_collector%20%5B8%5D
+hy2://c3054d61-c708-4594-9797-f50acd24de2a@qing-mk.mxtn.net:443?mport=21001-21099&insecure=1#%F0%9F%87%B2%F0%9F%87%B0%20MK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B40%5D
+hy2://c3054d61-c708-4594-9797-f50acd24de2a@qing-es.mxtn.net:443?mport=21001-21099&insecure=1#%F0%9F%87%AA%F0%9F%87%B8%20ES%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B39%5D
