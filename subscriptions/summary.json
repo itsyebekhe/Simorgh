@@ -1,13 +1,13 @@
 {
-    "generated_at": "2025-10-29T15:14:27+00:00",
-    "proxies_found_in_source": 1878,
-    "live_proxies_found": 1112,
+    "generated_at": "2025-10-29T16:17:04+00:00",
+    "proxies_found_in_source": 1879,
+    "live_proxies_found": 1123,
     "live_proxies_by_type": {
         "hy2": 3,
-        "ss": 79,
-        "trojan": 24,
+        "ss": 82,
+        "trojan": 21,
         "tuic": 3,
-        "vless": 857,
+        "vless": 868,
         "vmess": 146
     }
 }
