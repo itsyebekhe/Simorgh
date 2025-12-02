@@ -1,5 +1,1 @@
-hy2://78c2bad7-f5f3-41f2-88cc-81de9d05040b@xg1.mangshe.xyz:2056?insecure=1#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2ray_collector%20%5B8%5D
-hy2://a5a81a34-f257-11ef-ba82-f23c913c8d2b@0b3c55a6-t55r40-t69l7r-1teuc.us.hyhuawei.com:443?insecure=1&sni=0b3c55a6-t55r40-t69l7r-1teuc.us.hyhuawei.com#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B61%5D
-hy2://336501b6-51d2-11ee-a993-f23c9164ca5d@99d80c6b-t57ls0-t8kd6j-1c9em.hk2.hyhuawei.com:443?mport=30000-60000&insecure=1&sni=99d80c6b-t57ls0-t8kd6j-1c9em.hk2.hyhuawei.com#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B60%5D
-hy2://a5a81a34-f257-11ef-ba82-f23c913c8d2b@15a77f84-t53wg0-t69l7r-1teuc.us.hyhuawei.com:443?mport=30000-60000&insecure=1&sni=15a77f84-t53wg0-t69l7r-1teuc.us.hyhuawei.com#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B59%5D
-hy2://e4499a62-0cfe-11eb-ad8c-f23c9164ca5d@94d84c30-t6ngg0-tpftcp-13x18.us.hyhuawei.com:443?mport=30000-60000&insecure=1&sni=94d84c30-t6ngg0-tpftcp-13x18.us.hyhuawei.com#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B58%5D
+hy2://78c2bad7-f5f3-41f2-88cc-81de9d05040b@xg1.mangshe.xyz:2056?insecure=1#%E2%9D%94%20XX%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2ray_collector%20%5B8%5D
