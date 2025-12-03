@@ -1,4 +1,1 @@
-hy2://78c2bad7-f5f3-41f2-88cc-81de9d05040b@xg1.mangshe.xyz:2056?insecure=1#%E2%9D%94%20XX%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2ray_collector%20%5B8%5D
-hy2://d3b0b361-b878-4246-8a0e-ae86f6caa1f9@us6.oomz.ru:30000?insecure=1&sni=bing.com#%E2%9D%94%20XX%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B62%5D
-hy2://98cedeca-99a0-11ef-bb64-f23c913c8d2b@465e5b71-t53wg0-t6xrvm-1qaek.us.hyhuawei.com:443?insecure=1&sni=465e5b71-t53wg0-t6xrvm-1qaek.us.hyhuawei.com#%E2%9D%94%20XX%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B61%5D
-hy2://4b9ca118-7fab-11eb-bd3a-f23c9164ca5d@fdc3f3be-t6ngg0-tcq5zn-19qpt.us.hyhuawei.com:443?mport=30000-60000&insecure=1&sni=fdc3f3be-t6ngg0-tcq5zn-19qpt.us.hyhuawei.com#%E2%9D%94%20XX%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B60%5D
+hy2://78c2bad7-f5f3-41f2-88cc-81de9d05040b@xg1.mangshe.xyz:2056?insecure=1#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2ray_collector%20%5B8%5D
