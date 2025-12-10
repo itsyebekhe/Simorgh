@@ -1,1 +1,1 @@
-hy2://06b2ac52-fcc6-11ec-bb74-f23c9164ca5d@21a3b260-t6pb40-t9byd7-1jfvb.hk1.hyhuawei.com:443?insecure=1&sni=21a3b260-t6pb40-t9byd7-1jfvb.hk1.hyhuawei.com#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B94%5D
+hy2://51362ab6-b5e6-11ea-ad28-f23c913c8d2b@1bb8296b-t75z40-tnkuks-wujn.hk2.hyhuawei.com:443?mport=30000-60000&insecure=1#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B56%5D
