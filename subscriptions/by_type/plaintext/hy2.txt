@@ -1,1 +1,1 @@
-hy2://51362ab6-b5e6-11ea-ad28-f23c913c8d2b@1bb8296b-t75z40-tnkuks-wujn.hk2.hyhuawei.com:443?mport=30000-60000&insecure=1#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40config_proxy%20%5B56%5D
+hy2://78c2bad7-f5f3-41f2-88cc-81de9d05040b@xg1.mangshe.xyz:2056?insecure=1#%F0%9F%87%AD%F0%9F%87%B0%20HK%20%7C%20%F0%9F%94%92%20HY2%20%7C%20%40v2ray_collector%20%5B8%5D
