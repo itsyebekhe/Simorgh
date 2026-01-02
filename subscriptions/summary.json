@@ -1,9 +1,9 @@
 {
-    "generated_at": "2026-01-02T10:10:27+00:00",
+    "generated_at": "2026-01-02T11:09:17+00:00",
     "proxies_found_in_source": 20,
-    "live_proxies_found": 6,
+    "live_proxies_found": 7,
     "live_proxies_by_type": {
         "vless": 5,
-        "vmess": 1
+        "vmess": 2
     }
 }
