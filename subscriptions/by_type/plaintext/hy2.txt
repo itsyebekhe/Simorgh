@@ -1,1 +1,1 @@
-hy2://9f73c619627d6a5d@66.245.192.15:443?insecure=1&amp%3Bsni=www.apple.com&amp%3Bobfs=salamander&amp%3Bobfs-password=bd7f765e#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20HY2%20%7C%20%40vipv2rey
+hy2://9f73c619627d6a5d@66.245.192.15:443?insecure=1&amp%3Bsni=www.apple.com&amp%3Bobfs=salamander&amp%3Bobfs-password=bd7f765e#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20HY2%20%7C%20%40vipv2rey%20%231
