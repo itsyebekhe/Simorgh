@@ -1,1 +1,2 @@
 hy2://9f73c619627d6a5d@66.245.192.15:443?insecure=1&amp%3Bsni=www.apple.com&amp%3Bobfs=salamander&amp%3Bobfs-password=bd7f765e#%F0%9F%87%BA%F0%9F%87%B8%20US%20%7C%20HY2%20%7C%20%40vipv2rey%20%231
+hy2://0db758b4-e2ea-4716-bc9f-089bf6a1a30b@zz.9966663.xyz:50017?insecure=1&amp%3Bsni=do-vnyear.9966663.xyz#%F0%9F%87%B9%F0%9F%87%BC%20TW%20%7C%20HY2%20%7C%20%40config_proxy%20%231
