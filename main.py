@@ -7,7 +7,7 @@ import time
 import urllib.request
 import urllib.parse
 import socket
-import ipaddress  # Added for Cloudflare detection
+import ipaddress
 from datetime import datetime
 from typing import List, Dict, Optional, Any
 
@@ -54,11 +54,8 @@ def safe_base64_encode(b: bytes) -> str:
 # --- Cloudflare Logic ---
 
 def load_cloudflare_ranges():
-    """Downloads and loads Cloudflare IP ranges."""
     global CF_NETWORKS
     print("  - Loading Cloudflare IP ranges...")
-    
-    # Hardcoded fallback (common CF ranges)
     default_ranges = [
         "173.245.48.0/20", "103.21.244.0/22", "103.22.200.0/22", "103.31.4.0/22",
         "141.101.64.0/18", "108.162.192.0/18", "190.93.240.0/20", "188.114.96.0/20",
@@ -67,7 +64,6 @@ def load_cloudflare_ranges():
         "2606:4700::/32", "2803:f800::/32", "2405:b500::/32", "2405:8100::/32",
         "2a06:98c0::/29", "2c0f:f248::/32"
     ]
-
     try:
         response = requests.get(CF_RANGES_URL, timeout=10)
         if response.status_code == 200:
@@ -75,29 +71,23 @@ def load_cloudflare_ranges():
             for line in lines:
                 line = line.strip()
                 if line and not line.startswith('#'):
-                    try:
-                        CF_NETWORKS.append(ipaddress.ip_network(line))
+                    try: CF_NETWORKS.append(ipaddress.ip_network(line))
                     except ValueError: pass
         else:
-            print("    [WARNING] Failed to download CF ranges. Using default.")
             for r in default_ranges:
                 try: CF_NETWORKS.append(ipaddress.ip_network(r))
                 except: pass
     except Exception:
-        print("    [WARNING] Error loading CF ranges. Using default.")
         for r in default_ranges:
             try: CF_NETWORKS.append(ipaddress.ip_network(r))
             except: pass
 
 def is_cloudflare(ip_str: str) -> bool:
-    """Checks if an IP belongs to Cloudflare."""
     try:
         ip_obj = ipaddress.ip_address(ip_str)
         for net in CF_NETWORKS:
-            if ip_obj in net:
-                return True
-    except ValueError:
-        pass
+            if ip_obj in net: return True
+    except ValueError: pass
     return False
 
 # --- GeoIP Logic ---
@@ -111,8 +101,7 @@ def download_geoip_db():
             try:
                 GEOIP_READER = geoip2.database.Reader(GEOIP_DB_PATH)
                 return
-            except Exception:
-                pass 
+            except Exception: pass 
 
     print("  - Downloading GeoIP Database...")
     try:
@@ -123,8 +112,6 @@ def download_geoip_db():
                     if chunk: f.write(chunk)
             print("  - GeoIP Database downloaded successfully.")
             GEOIP_READER = geoip2.database.Reader(GEOIP_DB_PATH)
-        else:
-            print("  - [WARNING] Failed to download GeoIP DB.")
     except Exception as e:
         print(f"  - [ERROR] GeoIP download failed: {e}")
 
@@ -132,35 +119,21 @@ def resolve_ip(host: str) -> Optional[str]:
     try:
         socket.inet_aton(host)
         return host
-    except socket.error:
-        pass
+    except socket.error: pass
     try:
         return socket.gethostbyname(host)
-    except Exception:
-        return None
+    except Exception: return None
 
 def get_country_code(hostname: str) -> str:
-    """
-    1. Resolve IP
-    2. Check if Cloudflare -> Return 'CF'
-    3. Check GeoIP -> Return ISO Code
-    """
     if not hostname: return "UNK"
     ip = resolve_ip(hostname)
     if not ip: return "UNK"
-
-    # 1. Check Cloudflare
-    if is_cloudflare(ip):
-        return "CF"
-
-    # 2. Check GeoIP
+    if is_cloudflare(ip): return "CF"
     if GEOIP_READER:
         try:
             response = GEOIP_READER.country(ip)
             return response.country.iso_code if response.country.iso_code else "UNK"
-        except Exception:
-            pass
-            
+        except Exception: pass
     return "UNK"
 
 # --- Parsing Logic ---
@@ -179,10 +152,8 @@ def detect_type(input_str: str) -> Optional[str]:
 def config_parse(input_str: str) -> Optional[Dict[str, Any]]:
     config_type = detect_type(input_str)
     if config_type == 'vmess':
-        try:
-            return json.loads(safe_base64_decode(input_str[8:]))
-        except Exception:
-            return None
+        try: return json.loads(safe_base64_decode(input_str[8:]))
+        except Exception: return None
     elif config_type in ['vless', 'trojan', 'tuic', 'hy2', 'ss']:
         try:
             parsed = urllib.parse.urlparse(input_str)
@@ -202,8 +173,7 @@ def config_parse(input_str: str) -> Optional[Dict[str, Any]]:
                 'protocol': config_type, 'username': parsed.username, 'hostname': parsed.hostname,
                 'port': parsed.port, 'params': params, 'hash': parsed.fragment
             }
-        except Exception:
-            return None
+        except Exception: return None
     return None
 
 def print_progress(current: int, total: int, message: str = ''):
@@ -233,13 +203,10 @@ class ConfigWrapper:
         if not self.decoded: return default
         return self.decoded.get('params', {}).get(key, default)
 
-def generate_new_name(wrapper: ConfigWrapper, latency: int) -> str:
+def generate_base_name(wrapper: ConfigWrapper, latency: int) -> str:
     if not wrapper.is_valid(): return "InvalidConfig"
     protocol = wrapper.type.upper()
-    
-    # This now checks Cloudflare -> GeoIP
     country = get_country_code(wrapper.get_server())
-    
     latency_str = f"{latency}ms"
     details = []
     if wrapper.type in ['vless', 'vmess', 'trojan']:
@@ -247,7 +214,6 @@ def generate_new_name(wrapper: ConfigWrapper, latency: int) -> str:
         if security in ['tls', 'reality']: details.append(security.upper())
         transport = wrapper.get_param('type', wrapper.decoded.get('net'))
         if transport and transport != 'tcp': details.append(transport.upper())
-        
     name_parts = [protocol, country] + details + [latency_str]
     return '_'.join(filter(None, name_parts))
 
@@ -280,8 +246,7 @@ async def check_connectivity(host: str, port: int, timeout: int) -> int:
         writer.close()
         await writer.wait_closed()
         return int(latency)
-    except Exception:
-        return -1
+    except Exception: return -1
 
 async def worker(queue: asyncio.Queue, results: list, progress: dict, total: int):
     while True:
@@ -316,11 +281,9 @@ async def check_ports_parallel(proxies_to_check: List[Dict]) -> List[Dict]:
 def main():
     print("Starting proxy fetch and check process...")
     
-    # 0. Setup External Data
     download_geoip_db()
     load_cloudflare_ranges()
 
-    # 1. Fetch
     print("  - Fetching subscription file from GitHub...")
     try:
         req = urllib.request.Request(GITHUB_SUB_URL, headers={'User-Agent': USER_AGENT})
@@ -337,7 +300,6 @@ def main():
     if not all_configs: print("[WARNING] No proxy configurations found."); sys.exit(0)
     print(f"  - Found {len(all_configs)} configs.")
 
-    # 2. Deduplicate
     unique_configs_to_check, seen_host_ports = [], set()
     print("  - Deduplicating...")
     for config in all_configs:
@@ -350,27 +312,41 @@ def main():
                     seen_host_ports.add(endpoint_key)
                     unique_configs_to_check.append({'host': server, 'port': port, 'config': config})
     
-    # 3. Check Ports
     print(f"  - Checking {len(unique_configs_to_check)} unique configs...")
     live_configs_with_latency = asyncio.run(check_ports_parallel(unique_configs_to_check))
     print(f"\n  - Found {len(live_configs_with_latency)} live proxies.")
 
-    # 4. Rename (CF & GeoIP)
-    print("  - Renaming configurations (CF & GeoIP lookup)...")
+    print("  - Renaming configurations (Unique Names)...")
     renamed_live_configs = []
+    
+    # Dictionary to track duplicate names
+    name_counter = {}
+    
     count, total_live = 0, len(live_configs_with_latency)
     
     for item in live_configs_with_latency:
         wrapper = ConfigWrapper(item['config'])
         if wrapper.is_valid():
-            new_name = generate_new_name(wrapper, item['latency'])
-            renamed_config_str = rename_config(item['config'], new_name)
+            # 1. Generate Base Name (e.g., VLESS_US_TLS_150ms)
+            base_name = generate_base_name(wrapper, item['latency'])
+            
+            # 2. Check for Duplicates & Append Counter
+            if base_name in name_counter:
+                name_counter[base_name] += 1
+                final_name = f"{base_name}_{name_counter[base_name]}"
+            else:
+                name_counter[base_name] = 1
+                final_name = base_name
+            
+            # 3. Rename
+            renamed_config_str = rename_config(item['config'], final_name)
             renamed_live_configs.append({'config': renamed_config_str, 'latency': item['latency']})
+        
         count += 1
         print_progress(count, total_live, "Renaming: ")
     print("")
 
-    # 5. Sort & Save
+    # --- Sorting & Saving ---
     categorized_configs = {}
     for item in renamed_live_configs:
         c_type = detect_type(item['config'])
@@ -398,20 +374,18 @@ def main():
         with open(f"{dir_base64}/{c_type}", "w", encoding='utf-8') as f: f.write(base64_content)
         print(f"    - Saved {c_type}")
 
-    # Save Mixed
+    # Mixed
     all_live_list = [p['config'] for p in sorted(renamed_live_configs, key=lambda x: x['latency'])]
     all_live_txt = "\n".join(all_live_list)
     all_live_b64 = safe_base64_encode(all_live_txt.encode('utf-8'))
-    
     with open(f"{dir_normal}/mixed", "w", encoding='utf-8') as f: f.write(all_live_txt)
     with open(f"{dir_base64}/mixed", "w", encoding='utf-8') as f: f.write(all_live_b64)
     print(f"    - Saved mixed (Total: {len(all_live_list)})")
 
-    # Save High Speed
+    # High Speed
     top_list = [p['config'] for p in sorted(top_fastest_proxies, key=lambda x: x['latency'])]
     top_txt = "\n".join(top_list)
     top_b64 = safe_base64_encode(top_txt.encode('utf-8'))
-    
     with open(f"{dir_normal}/high_speed", "w", encoding='utf-8') as f: f.write(top_txt)
     with open(f"{dir_base64}/high_speed", "w", encoding='utf-8') as f: f.write(top_b64)
     print(f"    - Saved high_speed (Total: {len(top_list)})")
