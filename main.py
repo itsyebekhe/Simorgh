@@ -2,12 +2,12 @@ import asyncio
 import base64
 import json
 import os
-import re
 import sys
 import time
 import urllib.request
 import urllib.parse
 import socket
+import ipaddress  # Added for Cloudflare detection
 from datetime import datetime
 from typing import List, Dict, Optional, Any
 
@@ -30,8 +30,12 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 GEOIP_DB_PATH = 'Country.mmdb'
 GEOIP_DB_URL = "https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb"
 
-# Global Reader Variable
+# Cloudflare Configuration
+CF_RANGES_URL = "https://raw.githubusercontent.com/ircfspace/cf-ip-ranges/refs/heads/main/export.ipv4"
+
+# Global Variables
 GEOIP_READER = None
+CF_NETWORKS = []
 
 # ============================================================================
 # UTILITY FUNCTIONS
@@ -46,6 +50,55 @@ def safe_base64_decode(s: str) -> bytes:
 
 def safe_base64_encode(b: bytes) -> str:
     return base64.urlsafe_b64encode(b).rstrip(b'=').decode('utf-8')
+
+# --- Cloudflare Logic ---
+
+def load_cloudflare_ranges():
+    """Downloads and loads Cloudflare IP ranges."""
+    global CF_NETWORKS
+    print("  - Loading Cloudflare IP ranges...")
+    
+    # Hardcoded fallback (common CF ranges)
+    default_ranges = [
+        "173.245.48.0/20", "103.21.244.0/22", "103.22.200.0/22", "103.31.4.0/22",
+        "141.101.64.0/18", "108.162.192.0/18", "190.93.240.0/20", "188.114.96.0/20",
+        "197.234.240.0/22", "198.41.128.0/17", "162.158.0.0/15", "104.16.0.0/13",
+        "104.24.0.0/14", "172.64.0.0/13", "131.0.72.0/22", "2400:cb00::/32",
+        "2606:4700::/32", "2803:f800::/32", "2405:b500::/32", "2405:8100::/32",
+        "2a06:98c0::/29", "2c0f:f248::/32"
+    ]
+
+    try:
+        response = requests.get(CF_RANGES_URL, timeout=10)
+        if response.status_code == 200:
+            lines = response.text.splitlines()
+            for line in lines:
+                line = line.strip()
+                if line and not line.startswith('#'):
+                    try:
+                        CF_NETWORKS.append(ipaddress.ip_network(line))
+                    except ValueError: pass
+        else:
+            print("    [WARNING] Failed to download CF ranges. Using default.")
+            for r in default_ranges:
+                try: CF_NETWORKS.append(ipaddress.ip_network(r))
+                except: pass
+    except Exception:
+        print("    [WARNING] Error loading CF ranges. Using default.")
+        for r in default_ranges:
+            try: CF_NETWORKS.append(ipaddress.ip_network(r))
+            except: pass
+
+def is_cloudflare(ip_str: str) -> bool:
+    """Checks if an IP belongs to Cloudflare."""
+    try:
+        ip_obj = ipaddress.ip_address(ip_str)
+        for net in CF_NETWORKS:
+            if ip_obj in net:
+                return True
+    except ValueError:
+        pass
+    return False
 
 # --- GeoIP Logic ---
 
@@ -87,14 +140,28 @@ def resolve_ip(host: str) -> Optional[str]:
         return None
 
 def get_country_code(hostname: str) -> str:
-    if not GEOIP_READER or not hostname: return "UNK"
+    """
+    1. Resolve IP
+    2. Check if Cloudflare -> Return 'CF'
+    3. Check GeoIP -> Return ISO Code
+    """
+    if not hostname: return "UNK"
     ip = resolve_ip(hostname)
     if not ip: return "UNK"
-    try:
-        response = GEOIP_READER.country(ip)
-        return response.country.iso_code if response.country.iso_code else "UNK"
-    except Exception:
-        return "UNK"
+
+    # 1. Check Cloudflare
+    if is_cloudflare(ip):
+        return "CF"
+
+    # 2. Check GeoIP
+    if GEOIP_READER:
+        try:
+            response = GEOIP_READER.country(ip)
+            return response.country.iso_code if response.country.iso_code else "UNK"
+        except Exception:
+            pass
+            
+    return "UNK"
 
 # --- Parsing Logic ---
 
@@ -169,7 +236,10 @@ class ConfigWrapper:
 def generate_new_name(wrapper: ConfigWrapper, latency: int) -> str:
     if not wrapper.is_valid(): return "InvalidConfig"
     protocol = wrapper.type.upper()
+    
+    # This now checks Cloudflare -> GeoIP
     country = get_country_code(wrapper.get_server())
+    
     latency_str = f"{latency}ms"
     details = []
     if wrapper.type in ['vless', 'vmess', 'trojan']:
@@ -177,6 +247,7 @@ def generate_new_name(wrapper: ConfigWrapper, latency: int) -> str:
         if security in ['tls', 'reality']: details.append(security.upper())
         transport = wrapper.get_param('type', wrapper.decoded.get('net'))
         if transport and transport != 'tcp': details.append(transport.upper())
+        
     name_parts = [protocol, country] + details + [latency_str]
     return '_'.join(filter(None, name_parts))
 
@@ -244,8 +315,12 @@ async def check_ports_parallel(proxies_to_check: List[Dict]) -> List[Dict]:
 
 def main():
     print("Starting proxy fetch and check process...")
+    
+    # 0. Setup External Data
     download_geoip_db()
+    load_cloudflare_ranges()
 
+    # 1. Fetch
     print("  - Fetching subscription file from GitHub...")
     try:
         req = urllib.request.Request(GITHUB_SUB_URL, headers={'User-Agent': USER_AGENT})
@@ -262,6 +337,7 @@ def main():
     if not all_configs: print("[WARNING] No proxy configurations found."); sys.exit(0)
     print(f"  - Found {len(all_configs)} configs.")
 
+    # 2. Deduplicate
     unique_configs_to_check, seen_host_ports = [], set()
     print("  - Deduplicating...")
     for config in all_configs:
@@ -274,11 +350,13 @@ def main():
                     seen_host_ports.add(endpoint_key)
                     unique_configs_to_check.append({'host': server, 'port': port, 'config': config})
     
+    # 3. Check Ports
     print(f"  - Checking {len(unique_configs_to_check)} unique configs...")
     live_configs_with_latency = asyncio.run(check_ports_parallel(unique_configs_to_check))
     print(f"\n  - Found {len(live_configs_with_latency)} live proxies.")
 
-    print("  - Renaming configurations (GeoIP lookup)...")
+    # 4. Rename (CF & GeoIP)
+    print("  - Renaming configurations (CF & GeoIP lookup)...")
     renamed_live_configs = []
     count, total_live = 0, len(live_configs_with_latency)
     
@@ -292,14 +370,13 @@ def main():
         print_progress(count, total_live, "Renaming: ")
     print("")
 
-    # --- Sorting & Saving ---
+    # 5. Sort & Save
     categorized_configs = {}
     for item in renamed_live_configs:
         c_type = detect_type(item['config'])
         if c_type: categorized_configs.setdefault(c_type, []).append(item)
     sorted_categories = sorted(categorized_configs.keys())
 
-    # Create Directories (Cleaner Structure)
     dir_normal = f"{OUTPUT_DIR}/normal"
     dir_base64 = f"{OUTPUT_DIR}/base64"
     os.makedirs(dir_normal, exist_ok=True)
@@ -308,7 +385,6 @@ def main():
     top_fastest_proxies, summary_data_by_type = [], {}
     print("  - Saving subscriptions...")
 
-    # Save by Type (vmess, vless, etc.) - NO EXTENSION
     for c_type in sorted_categories:
         proxies = sorted(categorized_configs[c_type], key=lambda x: x['latency'])
         top_fastest_proxies.extend(proxies[:TOP_N_PROXIES])
@@ -318,12 +394,11 @@ def main():
         normal_content = "\n".join(config_list)
         base64_content = safe_base64_encode(normal_content.encode('utf-8'))
         
-        # Save without .txt extension
         with open(f"{dir_normal}/{c_type}", "w", encoding='utf-8') as f: f.write(normal_content)
         with open(f"{dir_base64}/{c_type}", "w", encoding='utf-8') as f: f.write(base64_content)
         print(f"    - Saved {c_type}")
 
-    # Save Mixed (combined)
+    # Save Mixed
     all_live_list = [p['config'] for p in sorted(renamed_live_configs, key=lambda x: x['latency'])]
     all_live_txt = "\n".join(all_live_list)
     all_live_b64 = safe_base64_encode(all_live_txt.encode('utf-8'))
@@ -351,4 +426,4 @@ def main():
 if __name__ == "__main__":
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(main())
+    main()
