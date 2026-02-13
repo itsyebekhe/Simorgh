@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   # Runs the workflow automatically every hour
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/45 * * * *'
 
 # Concurrency ensures that only one instance of this workflow runs at a time.
 concurrency:
