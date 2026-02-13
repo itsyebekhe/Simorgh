@@ -5,10 +5,9 @@ on:
   workflow_dispatch:
   # Runs the workflow automatically every hour
   schedule:
-    - cron: '0 */1 * * *'
+    - cron: '0 * * * *'
 
 # Concurrency ensures that only one instance of this workflow runs at a time.
-# If a new run is triggered, the previous one will be allowed to finish.
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
@@ -16,6 +15,11 @@ concurrency:
 jobs:
   subscription:
     runs-on: ubuntu-latest
+    
+    # Grant permission to push changes
+    permissions:
+      contents: write
+      
     steps:
       # Step 1: Check out the repository code
       - name: Checkout Code
@@ -25,20 +29,27 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # You can use other versions like '3.10' or '3.12'
+          python-version: '3.11'
           cache: 'pip' # Caches dependencies for faster runs
 
-      # Step 3: Execute the Python script to generate subscription files
-      # Make sure your Python script is named 'main.py' or update the filename below.
+      # Step 3: Install the required libraries (requests, geoip2)
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Step 4: Execute the Python script
       - name: Execute Python script
         run: python main.py
 
-      # Step 4: Commit and push the generated files to the repository
+      # Step 5: Commit and push ONLY the generated subscriptions
       - name: Commit and Push changes
         run: |
           git config user.name "Simorgh"
           git config user.email "bot@Simorgh.local"
-          git add -A
+          
+          # Only stage the output directory to avoid committing the GeoIP database (binary bloat)
+          git add subscriptions/
+          
           # Check if there are any changes to commit
           if git diff-index --quiet HEAD; then
             echo "✅ No changes to commit."
