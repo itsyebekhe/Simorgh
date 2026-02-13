@@ -12,14 +12,14 @@ This repository automatically collects, tests, and organizes V2Ray proxies. Subs
 
 | توضیحات (Description) | پروتکل (Protocol) | لینک اشتراک (Normal) | لینک کدگذاری شده (Base64) |
 | :--- | :---: | :---: | :---: |
-| **همه پروکسی‌ها (پیشنهادی)** | **Mixed** | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/normal/mixed) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/base64/mixed) |
-| **سرعت بالا (کمترین پینگ)** | **High Speed** | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/normal/high_speed) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/base64/high_speed) |
-| کانفیگ‌های VLESS | VLESS | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/normal/vless) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/base64/vless) |
-| کانفیگ‌های VMess | VMess | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/normal/vmess) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/base64/vmess) |
-| کانفیگ‌های Trojan | Trojan | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/normal/trojan) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/base64/trojan) |
-| کانفیگ‌های Shadowsocks | SS | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/normal/ss) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/base64/ss) |
-| کانفیگ‌های Hysteria 2 | Hy2 | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/normal/hy2) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/base64/hy2) |
-| کانفیگ‌های TUIC | TUIC | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/normal/tuic) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/LiveProxy/main/subscriptions/base64/tuic) |
+| **همه پروکسی‌ها (پیشنهادی)** | **Mixed** | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/normal/mixed) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/base64/mixed) |
+| **سرعت بالا (کمترین پینگ)** | **High Speed** | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/normal/high_speed) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/base64/high_speed) |
+| کانفیگ‌های VLESS | VLESS | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/normal/vless) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/base64/vless) |
+| کانفیگ‌های VMess | VMess | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/normal/vmess) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/base64/vmess) |
+| کانفیگ‌های Trojan | Trojan | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/normal/trojan) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/base64/trojan) |
+| کانفیگ‌های Shadowsocks | SS | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/normal/ss) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/base64/ss) |
+| کانفیگ‌های Hysteria 2 | Hy2 | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/normal/hy2) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/base64/hy2) |
+| کانفیگ‌های TUIC | TUIC | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/normal/tuic) | [لینک (Link)](https://raw.githubusercontent.com/itsyebekhe/Simorgh/main/subscriptions/base64/tuic) |
 
 ---
 
