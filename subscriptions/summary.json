@@ -1,12 +1,12 @@
 {
-    "generated_at": "2026-06-13T22:58:40.896257",
+    "generated_at": "2026-06-14T00:10:50.634561",
     "total_scanned": 518,
-    "total_live": 368,
+    "total_live": 355,
     "breakdown": {
         "ss": 24,
-        "trojan": 19,
+        "trojan": 20,
         "tuic": 2,
-        "vless": 301,
-        "vmess": 22
+        "vless": 288,
+        "vmess": 21
     }
 }
