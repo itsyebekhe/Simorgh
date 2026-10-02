@@ -19,7 +19,7 @@ import geoip2.database
 # CONSTANTS
 # ============================================================================
 
-GITHUB_SUB_URL = 'https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/xray/base64/mix'
+GITHUB_SUB_URL = 'https://raw.githubusercontent.com/itsyebekhe/PSG/refs/heads/main/subscriptions/xray/mix.b64'
 OUTPUT_DIR = 'subscriptions'
 PORT_CHECK_TIMEOUT = 1.5
 PARALLEL_BATCH_SIZE = 200
