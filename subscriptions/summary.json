@@ -1,11 +1,11 @@
 {
-    "generated_at": "2026-10-15T22:40:06.527928",
+    "generated_at": "2026-10-16T00:45:06.544176",
     "total_scanned": 315,
-    "total_live": 231,
+    "total_live": 235,
     "breakdown": {
         "hy2": 1,
         "ss": 14,
-        "vless": 196,
+        "vless": 200,
         "vmess": 20
     }
 }
